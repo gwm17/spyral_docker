@@ -3,6 +3,8 @@ FROM python:${PYTHON_VERSION}-slim AS base
 
 WORKDIR /spyral
 
+ENV PYTHONWRITEBYTECODE=1
+
 RUN apt update && apt install -y pkg-config g++ libhdf5-dev
 
 RUN --mount=type=cache,target=/root/.cache/pip \
