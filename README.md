@@ -1,14 +1,12 @@
 # spyral_docker
 
-This repository contains a description to make a docker container with attpc_spyral installed. It doesn't do anything else.
+This repository contains a description to make a docker container with [attpc_spyral](https://github.com/ATTPC/Spyral) and [attpc_engine](https://github.com/ATTPC/attpc_engine) installed. It doesn't do anything else.
 
 ## How to use
 
 Build and run like
 
 ```bash
-docker build -t spyral
-docker run --mount=type=bind,source=my_script.py,target=/spyral/my_script.py spyral my_script.py
+docker build -t attpc_spyral .
+docker run attpc_spyral
 ```
-
-The mount is to attach your specific analysis script.

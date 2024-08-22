@@ -5,11 +5,14 @@ WORKDIR /spyral
 
 ENV PYTHONWRITEBYTECODE=1
 
-RUN apt update && apt install -y pkg-config g++ libhdf5-dev
+RUN apt update && apt install -y pkg-config g++
 
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install --upgrade pip  && \
-    python -m pip install -r requirements.txt
+COPY ./requirements.txt ./
+COPY ./hello.py ./
 
-ENTRYPOINT [ "python" ]
+RUN python -m pip install --no-cache-dir --upgrade pip  && \
+    python -m pip install --no-cache-dir -r requirements.txt
+
+# Note that because we typically actually target apptainer in Polaris
+# we rarely ever use the default CMD and it is just here for completeness
+CMD [ "python", "./hello.py"]
